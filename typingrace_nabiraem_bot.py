@@ -10,6 +10,7 @@
 # AUTHOR       : Tim Kornev (Timmate profile on GitHub)
 #
 # CREATED DATE : 27th of July, 2016
+#
 
 
 import os
@@ -52,21 +53,21 @@ LANGUAGE_BAR_ENG_COORDS = (1171, 662)
 # Set main menu constants.
 START_BUTTON_COORDS = (575, 462)
 START_BUTTON_COLOR = (147, 197, 75)   # Colors stored in RGB value.
-LOGIN_BUTTON_PIXEL_COORDS = (1213, 108)
-LOGIN_BUTTON_PIXEL_COLOR = (244, 124, 60)
+LOGIN_BUTTON_COORDS = (1213, 108)
+LOGIN_BUTTON_COLOR = (244, 124, 60)
 DOWN_ARROW_BUTTON_COORDS = (788, 462)
 CCR_BUTTON_COORDS = (729, 556)        # CCR stands for Create Custom Race
-GEAR_PIXEL_COORDS = (234, 305)
-GEAR_PIXEL_COLOR = (244, 124, 60)
+GEAR_COORDS = (234, 305)
+GEAR_COLOR = (244, 124, 60)
 LANGUAGE_FIELD_COORDS = (484, 240)
-RUS_LANGUAGE_BUTTON_COORDS = (465, 258)
-ENG_LANGUAGE_BUTTON_COORDS = (488, 276)
+RUS_LANGUAGE_OPTION_COORDS = (465, 258)
+ENG_LANGUAGE_OPTION_COORDS = (488, 276)
 # Set game window constants.
-RACER_PIXEL_COORDS = (66, 678)
-RACER_PIXEL_COLOR = (230, 6, 7)
+RACER_COORDS = (66, 678)
+RACER_COLOR = (230, 6, 7)
 # Set statistics window constants.
-MAIN_MENU_BUTTON_PIXEL_COORDS = (1095, 156)
-MAIN_MENU_BUTTON_PIXEL_COLOR = (192, 151, 13)
+MAIN_MENU_BUTTON_COORDS = (1095, 156)
+MAIN_MENU_BUTTON_COLOR = (192, 151, 13)
 
 # Store screenshots with races' statictics in this dir.
 SCREENSHOTS_DIR_NAME = 'typingrace_nabiraem_screenshots'
@@ -118,8 +119,8 @@ try:
                                     # over login button as in that case
                                     # it changes it's color to a darker one.
 
-        x, y = LOGIN_BUTTON_PIXEL_COORDS
-        color = LOGIN_BUTTON_PIXEL_COLOR  # that is original Login button's color
+        x, y = LOGIN_BUTTON_COORDS
+        color = LOGIN_BUTTON_COLOR  # that is original Login button's color
 
         if pyautogui.pixelMatchesColor(x, y, color):
             logging.debug('The user is not logged in.')
@@ -142,8 +143,8 @@ try:
         # Check whether the CCT window is loaded by locating
         # the orange gears.
         ccr_window_found = False
-        x, y = GEAR_PIXEL_COORDS
-        color = GEAR_PIXEL_COLOR
+        x, y = GEAR_COORDS
+        color = GEAR_COLOR
 
         while not ccr_window_found:
             if pyautogui.pixelMatchesColor(x, y, color):
@@ -163,13 +164,13 @@ try:
         pyautogui.click(x, y, button=BUTTON, duration=DURATION)  # open the Language
                                                                  # dropdown menu
         if TEXT_LANGUAGE == 'ENG':
-            x, y = ENG_LANGUAGE_BUTTON_COORDS
+            x, y = ENG_LANGUAGE_OPTION_COORDS
             pyautogui.click(x, y, button=BUTTON, duration=DURATION)  # click English
                                                                      # language label
             pyautogui.typewrite('\t' * 5)  # go to the Number Of
                                            # Participants radio button.
         elif TEXT_LANGUAGE == 'RUS':
-            x, y = RUS_LANGUAGE_BUTTON_COORDS
+            x, y = RUS_LANGUAGE_OPTION_COORDS
             pyautogui.click(x, y, button=BUTTON, duration=DURATION)  # click Russian
                                                                      # language label
             pyautogui.typewrite('\t' * 6)   # go to the Number Of
@@ -194,8 +195,8 @@ try:
         # Wait until the race window is loaded by locationg the racer in
         # red.
         race_window_found = False
-        x, y = RACER_PIXEL_COORDS
-        color = RACER_PIXEL_COLOR
+        x, y = RACER_COORDS
+        color = RACER_COLOR
 
         while not race_window_found:
             if pyautogui.pixelMatchesColor(x, y, color):
@@ -326,8 +327,8 @@ try:
         # the white-yellow "Список гонок" button. Note that this block of code
         # also handles Anti-Cheat app ban message as it also has this button.
         statistics_window_found = False
-        x, y = MAIN_MENU_BUTTON_PIXEL_COORDS
-        color = MAIN_MENU_BUTTON_PIXEL_COLOR
+        x, y = MAIN_MENU_BUTTON_COORDS
+        color = MAIN_MENU_BUTTON_COLOR
         # The same thing as with the login button: make sure
         # the cursor does not hover over the button so that it changes it's
         # color to a darker one.
@@ -344,7 +345,7 @@ try:
                 logging.debug('Could not see the statistics window.')
                 time.sleep(1)
 
-        x, y = MAIN_MENU_BUTTON_PIXEL_COORDS
+        # Click the Main Menu button.
         pyautogui.click(x, y, button=BUTTON, duration=DURATION)
         logging.debug('Clicked the Main Menu button.')
 
