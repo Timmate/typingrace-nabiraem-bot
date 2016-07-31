@@ -45,6 +45,8 @@ DURATION = 0.3         # mouse move time
 INTERVAL = 0.075       # time to wait after typing each character (type speed measure)
                        # i.e. 0.075 is apprx. 800 cpm
                        # and 0.1 is apprx. 600 cpm on my laptop.
+                       # Note that the speed higher than 800 cpm is restricted by
+                       # the Anti-Cheat app.
 
 # Set the language bar constants.
 LANGUAGE_BAR_COORDS = (1146, 746)       # these are used for changing the
