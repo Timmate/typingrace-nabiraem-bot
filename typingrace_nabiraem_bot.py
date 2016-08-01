@@ -49,16 +49,20 @@ INTERVAL = 0.075       # time to wait after typing each character (type speed me
                        # the Anti-Cheat app.
 
 # Set the language bar constants.
+# NOTE: Every *COORDS* value is a pixel screen coordinate, not the whole
+# element region. You are free to choose any pixel that belongs to a
+# particular element.
 LANGUAGE_BAR_COORDS = (1146, 746)       # these are used for changing the
-LANGUAGE_BAR_RUS_COORDS = (1168, 692)   # input language.
+LANGUAGE_BAR_RUS_COORDS = (1168, 692)   # keyboard input language.
 LANGUAGE_BAR_ENG_COORDS = (1171, 662)
 # Set main menu constants.
 START_BUTTON_COORDS = (575, 462)
-START_BUTTON_COLOR = (147, 197, 75)   # Colors stored in RGB value.
+START_BUTTON_COLOR = (147, 197, 75)     # Colors's values are stored in the RGB format.
 LOGIN_BUTTON_COORDS = (1213, 108)
 LOGIN_BUTTON_COLOR = (244, 124, 60)
 DOWN_ARROW_BUTTON_COORDS = (788, 462)
-CCR_BUTTON_COORDS = (729, 556)        # CCR stands for Create Custom Race
+CCR_BUTTON_COORDS = (729, 556)          # CCR stands for Create Custom Race
+# Set CCR menu constants.
 GEAR_COORDS = (234, 305)
 GEAR_COLOR = (244, 124, 60)
 LANGUAGE_FIELD_COORDS = (484, 240)
@@ -142,18 +146,18 @@ try:
         pyautogui.click(x, y, button=BUTTON, duration=DURATION)
         logging.debug('Clicked Create Custom Race button.')
 
-        # Check whether the CCT window is loaded by locating
+        # Check whether the CCT menu is loaded by locating
         # the orange gears.
-        ccr_window_found = False
+        ccr_menu_found = False
         x, y = GEAR_COORDS
         color = GEAR_COLOR
 
-        while not ccr_window_found:
+        while not ccr_menu_found:
             if pyautogui.pixelMatchesColor(x, y, color):
-                ccr_window_found = True
+                ccr_menu_found = True
                 logging.debug('A am creating the custom race...')
             else:
-                logging.debug('Could not find CCR window.')
+                logging.debug('Could not find the CCR menu.')
                 time.sleep(1)
 
 
