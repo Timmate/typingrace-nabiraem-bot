@@ -4,10 +4,9 @@
 #
 # VERSION      : 1.0
 #
-# DESCRIPTION  : The bot for typingrace.nabiraem.ru game competition on fast
-#                typing.
+# DESCRIPTION  : A bot for typingrace.nabiraem.ru game competition on fast typing.
 #
-# AUTHOR       : Tim Kornev (Timmate profile on GitHub)
+# AUTHOR       : Tim Kornev (@Timmate on GitHub)
 #
 # CREATED DATE : 27th of July, 2016
 #
@@ -24,59 +23,15 @@ import requests
 import bs4
 import pyperclip
 
+from constants import *
 from lang_dicts import rus_eng_dict
 
 
 pyautogui.PAUSE = 0.5
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(message)s',
-                    datefmt='%H:%M:%S')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%H:%M:%S')
 # Uncomment the line below to disable logging.
 # logging.disable(logging.DEBUG)
-
-
-BUTTON = 'right'       # I am left-handed so right button is used for clicking,
-                       # dragging, etc. Change this to 'left' if the left button
-                       # is used primarily on your computer.
-RACES = 5              # specify here number of races
-TEXT_LANGUAGE = 'ENG'  # specify here the language of the races' texts
-DURATION = 0.3         # mouse move time
-INTERVAL = 0.075       # time to wait after typing each character (type speed measure)
-                       # i.e. 0.075 is apprx. 800 cpm
-                       # and 0.1 is apprx. 600 cpm on my laptop.
-                       # Note that the speed higher than 800 cpm is restricted by
-                       # the Anti-Cheat app.
-
-# Set the language bar constants.
-# NOTE: Every *COORDS* value is a pixel screen coordinate, not the whole
-# element region. You are free to choose any pixel that belongs to a
-# particular element.
-LANGUAGE_BAR_COORDS = (1146, 746)       # these are used for changing the
-LANGUAGE_BAR_RUS_COORDS = (1168, 692)   # keyboard input language.
-LANGUAGE_BAR_ENG_COORDS = (1171, 662)
-# Set main menu constants.
-START_BUTTON_COORDS = (575, 462)
-START_BUTTON_COLOR = (147, 197, 75)     # Colors's values are stored in the RGB format.
-LOGIN_BUTTON_COORDS = (1213, 108)
-LOGIN_BUTTON_COLOR = (244, 124, 60)
-DOWN_ARROW_BUTTON_COORDS = (788, 462)
-CCR_BUTTON_COORDS = (729, 556)          # CCR stands for Create Custom Race
-# Set CCR menu constants.
-GEAR_COORDS = (234, 305)
-GEAR_COLOR = (244, 124, 60)
-LANGUAGE_FIELD_COORDS = (484, 240)
-RUS_LANGUAGE_OPTION_COORDS = (465, 258)
-ENG_LANGUAGE_OPTION_COORDS = (488, 276)
-# Set game window constants.
-RACER_COORDS = (66, 678)
-RACER_COLOR = (230, 6, 7)
-# Set statistics window constants.
-MAIN_MENU_BUTTON_COORDS = (1095, 156)
-MAIN_MENU_BUTTON_COLOR = (192, 151, 13)
-
-# Store screenshots with races' statictics in this dir.
-SCREENSHOTS_DIR_NAME = 'typingrace_nabiraem_screenshots'
 
 
 # Start the program.
@@ -87,7 +42,7 @@ logging.debug('Press Ctrl-C to abort at any time.')
 logging.debug('To interrupt mouse movement, move mouse to upper left corner.')
 # Print the prettified race text language.
 logging.debug('\n\n' + ' Language: {} '.center(70, ':').format(TEXT_LANGUAGE) + '\n')
-os.makedirs(SCREENSHOTS_DIR_NAME, exist_ok=True)  # create the dir for
+os.makedirs(SCREENSHOTS_DIR_NAME, exist_ok=True)  # create dir for
                                                   # screenshots.
 
 # try/except is used here to handle the KeyboardInterrupt exception that
@@ -98,7 +53,6 @@ try:
         # Print the prettified race number.
         logging.debug('\n\n' + ' RACE {} '.center(70, '=').format(str(race + 1)) + \
                       '\n')
-
 
 
 # Navigate through the main menu.
@@ -118,7 +72,7 @@ try:
                 logging.debug('Could not find the green Start button. Where am I?')
                 time.sleep(1)
 
-        # Check whether the user is logged in. If not, the custom race
+        # Check whether the user is logged in.  If not, the custom race
         # cannot be created.
         pyautogui.moveTo(500, 600)  # move mouse to some position in the
                                     # center so that it does not hover
@@ -278,7 +232,7 @@ try:
             race_text = mo.group(1)[1:]
             # Use list comprehension concept for transliting the text
             # to English: if char is in dict's keys, translit it with
-            # the dict key's value. Otherwise, do nothing with that char (for
+            # the dict key's value.  Otherwise, do nothing with that char (for
             # some symbols like '%', '!', '*' that could be typed using the
             # same key on Rus and Eng keyboards).
             race_text = ''.join([rus_eng_dict[char] if char in rus_eng_dict.keys() \
@@ -330,7 +284,7 @@ try:
 # ========================
 
         # Check whether the race statistics window is loaded by locating
-        # the white-yellow "Список гонок" button. Note that this block of code
+        # the white-yellow "Список гонок" button.  Note that this block of code
         # also handles Anti-Cheat app ban message as it also has this button.
         statistics_window_found = False
         x, y = MAIN_MENU_BUTTON_COORDS

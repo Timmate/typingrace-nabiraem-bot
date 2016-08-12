@@ -1,3 +1,15 @@
+#
+# NAME         : lang_dicts.py
+#
+# DESCRIPTION  : Contains language dictionaries that are used by
+#                `typingrace_nabiraem_bot.py`.
+#
+# AUTHOR       : Tim Kornev (@Timmate on GitHub)
+#
+# CREATED DATE : 27th of July, 2016
+#
+
+
 rus_eng_dict = {'А': 'F', 'Б': '<', 'В': 'D', 'Г': 'U', 'Д': 'L', 'Е': 'T',
                 'Ё': '~', 'Ж': ':', 'З': 'P', 'И': 'B', 'Й': 'Q', 'К': 'R',
                 'Л': 'K', 'М': 'V', 'Н': 'Y', 'О': 'J', 'П': 'G', 'Р': 'H',
