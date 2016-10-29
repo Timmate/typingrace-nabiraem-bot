@@ -29,19 +29,19 @@ from lang_dicts import rus_eng_dict
 
 pyautogui.PAUSE = 0.5
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%H:%M:%S')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%H:%M:%S')
 # Uncomment the line below to disable logging.
-# logging.disable(logging.DEBUG)
+# logging.disable(logging.INFO)
 
 
 # Start the program.
 # ==================
 
-logging.debug('\n\n' + ' PROGRAM STARTED '.center(70, '_') + '\n')
-logging.debug('Press Ctrl-C to abort at any time.')
-logging.debug('To interrupt mouse movement, move mouse to upper left corner.')
+logging.info('\n\n' + ' PROGRAM STARTED '.center(70, '_') + '\n')
+logging.info('Press Ctrl-C to abort at any time.')
+logging.info('To interrupt mouse movement, move mouse to upper left corner.')
 # Print the prettified race text language.
-logging.debug('\n\n' + ' Language: {} '.center(70, ':').format(TEXT_LANGUAGE) + '\n')
+logging.info('\n\n' + ' Language: {} '.center(70, ':').format(TEXT_LANGUAGE) + '\n')
 os.makedirs(SCREENSHOTS_DIR_NAME, exist_ok=True)  # create dir for
                                                   # screenshots.
 
@@ -51,7 +51,7 @@ try:
     for race in range(RACES):   # race *RACES* times.
 
         # Print the prettified race number.
-        logging.debug('\n\n' + ' RACE {} '.center(70, '=').format(str(race + 1)) + \
+        logging.info('\n\n' + ' RACE {} '.center(70, '=').format(str(race + 1)) + \
                       '\n')
 
 
@@ -67,9 +67,9 @@ try:
         while not main_page_found:
             if pyautogui.pixelMatchesColor(x, y, color):
                 main_page_found = True
-                logging.debug('I am on the main page.')
+                logging.info('I am on the main page.')
             else:
-                logging.debug('Could not find the green Start button. Where am I?')
+                logging.info('Could not find the green Start button. Where am I?')
                 time.sleep(1)
 
         # Check whether the user is logged in.  If not, the custom race
@@ -83,13 +83,13 @@ try:
         color = LOGIN_BUTTON_COLOR  # that is original Login button's color
 
         if pyautogui.pixelMatchesColor(x, y, color):
-            logging.debug('The user is not logged in.')
-            logging.debug('End of the program.')
+            logging.info('The user is not logged in.')
+            logging.info('End of the program.')
             raise Exception('The custom race cannot be created unless ' + \
                             'the user is logged in.')
         else:
-            logging.debug('The user is logged in.')
-            logging.debug('OK. Continue.')
+            logging.info('The user is logged in.')
+            logging.info('OK. Continue.')
 
         # Open dropdown menu by clicking the little Down Arrow button
         # (on the right side of the Start button), then click Create Custom
@@ -98,7 +98,7 @@ try:
         pyautogui.click(x, y, button=BUTTON, duration=DURATION)
         x, y = CCR_BUTTON_COORDS
         pyautogui.click(x, y, button=BUTTON, duration=DURATION)
-        logging.debug('Clicked Create Custom Race button.')
+        logging.info('Clicked Create Custom Race button.')
 
         # Check whether the CCT menu is loaded by locating
         # the orange gears.
@@ -109,9 +109,9 @@ try:
         while not ccr_menu_found:
             if pyautogui.pixelMatchesColor(x, y, color):
                 ccr_menu_found = True
-                logging.debug('A am creating the custom race...')
+                logging.info('A am creating the custom race...')
             else:
-                logging.debug('Could not find the CCR menu.')
+                logging.info('Could not find the CCR menu.')
                 time.sleep(1)
 
 
@@ -140,7 +140,7 @@ try:
                                             # choosing the text type that
                                             # should be skipped.
 
-        logging.debug('Changed the language of the race text to {}.'.format(TEXT_LANGUAGE))
+        logging.info('Changed the language of the race text to {}.'.format(TEXT_LANGUAGE))
 
         for i in range(random.randint(0, 3)):  # choose a random number of
             pyautogui.press('right')           # participants.
@@ -161,9 +161,9 @@ try:
         while not race_window_found:
             if pyautogui.pixelMatchesColor(x, y, color):
                 race_window_found = True
-                logging.debug('I see the race game window.')
+                logging.info('I see the race game window.')
             else:
-                logging.debug('Could not find the race game window.')
+                logging.info('Could not find the race game window.')
                 time.sleep(1)
 
 
@@ -180,7 +180,7 @@ try:
         url = pyperclip.paste()
 
         race_id = '#' + os.path.basename(url)
-        logging.debug('Entered the race {}.'.format(race_id))
+        logging.info('Entered the race {}.'.format(race_id))
 
         # Parse the html code with Beautiful Soup.
         res = requests.get(url)
@@ -261,10 +261,10 @@ try:
             soup = bs4.BeautifulSoup(res.text, 'html.parser')
             title_elem = soup.select('title')
             title_text = title_elem[0].getText()
-            logging.debug('Waiting for beginning of the race...')
+            logging.info('Waiting for beginning of the race...')
             time.sleep(1)
 
-        logging.debug('The countdown begins.')
+        logging.info('The countdown begins.')
 
 
 # Type the text.
@@ -272,7 +272,7 @@ try:
 
         time.sleep(8)   # it takes apprx. 8 seconds from the title change
                         # to the actual beginning of the race
-        logging.debug('The race begins. I am going to win it.')
+        logging.info('The race begins. I am going to win it.')
         # Some first chars should be typed with a bit lower speed than
         # the specified value of *INTERVAL* in order to avoid the
         # Anti-Cheat ban.
@@ -298,21 +298,21 @@ try:
             if pyautogui.pixelMatchesColor(x, y, color):
                 statistics_window_found = True
                 pyautogui.screenshot(os.path.join(SCREENSHOTS_DIR_NAME, 'race_{}.png'.format(str(race + 1))))
-                logging.debug('The race is over.')
-                logging.debug('Took a screenshot of the race statistics.')
+                logging.info('The race is over.')
+                logging.info('Took a screenshot of the race statistics.')
 
             else:
-                logging.debug('Could not see the statistics window.')
+                logging.info('Could not see the statistics window.')
                 time.sleep(1)
 
         # Click the Main Menu button.
         pyautogui.click(x, y, button=BUTTON, duration=DURATION)
-        logging.debug('Clicked the Main Menu button.')
+        logging.info('Clicked the Main Menu button.')
 
 
     # End the program when the 'for' loop is over.
-    logging.debug('\n\n' + ' END OF THE PROGRAM '.center(70, '_') + '\n\n')
+    logging.info('\n\n' + ' END OF THE PROGRAM '.center(70, '_') + '\n\n')
 
 
 except KeyboardInterrupt: # handle the exception
-    logging.debug('\n\n' + ' END OF THE PROGRAM '.center(70, '_') + '\n\n')
+    logging.info('\n\n' + ' END OF THE PROGRAM '.center(70, '_') + '\n\n')

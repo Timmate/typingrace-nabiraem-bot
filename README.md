@@ -1,27 +1,34 @@
-﻿## typingrace-nabiraem-bot
-A bot written in Python for [typingrace.nabiraem.ru][1] game competition on fast typing.
+## typingrace-nabiraem-bot
 
-Python 3.X only. Supports only English and Russian keyboard languages.
+A bot for [typingrace.nabiraem.ru][1] game competition on fast typing.
 
-## Installation
-1. Install [Python 3.X][2] (for Windows users). Install `python3-pip` package if you are using Linux OS.
-2. Clone this repository to your local machine. See [Atlassian's Git Tutorial][3] for details. Change working directory
-to `typingrace-nabiraem-bot/`.
-2. Use `pip install -r requirements.txt` to install all dependencies if you are using Windows OS. If you are a Linux user,
-see [pyautogui docs][4] for installation details. Then try to run `pip install -r requirements.txt` in Terminal.
-3. Modify `constants.py` file:
+Python 3.x only (for Python 2.x backward compatibility see [this][2]).
+
+Supports only English and Russian keyboard languages.
+
+### Installation & Usage
+
+1. Use `pip install -r requirements.txt` to install all dependencies.
+   If you are a Linux user, you may experience issues with `pyautogui`.
+   See [pyautogui docs][3] for installation details.
+2. Configure `constants.py` file:
   * Set `TEXT_LANGUAGE`, `BUTTON`, `RACES`, `INTERVAL` game constants.
 
-  * Set game elements coordinates and pixel RGB colors according to your screen resolution, OS and browser.
-    `pyautogui.displayMousePosition()` could be of great help to deal with pixel coordinates and colors.
-    Also, see the *images* directory for some help on finding the game elements' regions.
+  * Set game elements' coordinates and pixels' RGB colors according to your
+    screen resolution, OS and browser. `pyautogui.displayMousePosition()`
+    function could be of great help to deal with that.
+    Also, see *Images* directory for some help on finding the game elements' regions.
+
+3. Feel free to experiment with setting different values to the `INTERVAL`
+   constant to adjust typing speed.
+4. To interrupt the program and regain control of the mouse, move the mouse to the top-left corner of your screen.
+
+5. Have some fun winning races with incredible scores!
 
 
-5. Feel free to experiment with setting different values to the `INTERVAL` constant to adjust typing speed.
-6. Have some fun winning races with incredible scores!
+### License
 
-## License
-Copyright © 2016 TIm Kornev (@Timmate).
+Copyright © 2016 Tim Kornev (@Timmate).
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33,6 +40,5 @@ See the *License* file included in this repository for further details.
 
 
 [1]: http://typingrace.nabiraem.ru
-[2]: https://www.python.org
-[3]: https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone
-[4]: http://pyautogui.readthedocs.io/en/latest/                                                     
+[2]: http://python-future.org/quickstart.html
+[3]: http://pyautogui.readthedocs.io/en/latest/                                                     
