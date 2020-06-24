@@ -6,4 +6,4 @@ PyMsgBox==1.0.3
 pyperclip==1.5.27
 PyScreeze==0.1.8
 PyTweening==1.0.3
-requests==2.10.0
+requests==2.20.0
